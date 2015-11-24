@@ -1,0 +1,24 @@
+class Device
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+	private name : seq of char;
+	private car : seq of char;
+	private plate : seq of char;
+	private cc : nat;
+	private nif : nat;
+	private nib : nat;
+	private debt: real;
+	
+	
+operations
+	public Device: seq of char * seq of char * seq of char * nat * nat * nat ==> Device
+	Device(dName, dCar, dPlate, dCC, dNif, dNib) == (name := dName; car := dCar; plate := dPlate; cc := dCC; nif := dNif; nib := dNib; debt:=0; return self);
+
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Device
