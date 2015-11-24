@@ -1,0 +1,51 @@
+class Client
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+	private name : seq of char;
+	private cc : nat;
+	private nif : nat;
+	private nib : nat;
+	private debt: real;
+	private devices: seq of Device;
+	
+operations
+	public Client: seq of char * nat * nat * nat * seq of Device ==> Client
+	Client(cName, cCC, cNif, cNib, cDevices) == (name := cName; cc := cCC; nif := cNif; nib := cNib; devices := cDevices; debt:=0; return self)
+	post name = cName and cc = cCC and nif = cNif and nib = cNib and devices = cDevices;
+	
+	
+	public addToDebt: real ==> ()
+		addToDebt(value) == debt := debt + value;
+		
+	public addDevice : Device  ==> ()
+		addDevice(cDevice) == devices := devices ^ [cDevice] 
+		post devices = devices~ ^ [cDevice];
+		
+		
+	public getName: () ==> seq of char
+		getName() == return name;
+	
+	public getCc: () ==> real
+		getCc() == return cc;
+		
+	public getNif: () ==> real
+		getNif() == return nif;
+	
+	public getNib: () ==> real
+		getNib() == return nib;
+	
+	public getDebt: () ==> real
+		getDebt() == return debt;
+		
+	public getDevices: () ==> seq of Device
+		getDevices() == return devices;
+
+
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Client

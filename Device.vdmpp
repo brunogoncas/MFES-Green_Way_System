@@ -4,19 +4,31 @@ types
 values
 -- TODO Define values here
 instance variables
-	private name : seq of char;
+	private id : seq of char;
 	private car : seq of char;
 	private plate : seq of char;
-	private cc : nat;
-	private nif : nat;
-	private nib : nat;
-	private debt: real;
+	private owner : Client;
 	
 	
 operations
-	public Device: seq of char * seq of char * seq of char * nat * nat * nat ==> Device
-	Device(dName, dCar, dPlate, dCC, dNif, dNib) == (name := dName; car := dCar; plate := dPlate; cc := dCC; nif := dNif; nib := dNib; debt:=0; return self);
+	public Device: seq of char * seq of char * seq of char * Client ==> Device
+	Device(dId, dCar, dPlate, dClient) == (id := dId; car := dCar; plate := dPlate; owner := dClient; return self)
+	post id = dId and car = dCar and plate = dPlate and owner = dClient;
 
+	
+	public GetId: () ==> seq of char
+		GetId() == return id;
+			
+	public GetCar: () ==> seq of char
+		GetCar() == return car;
+			
+	public GetPlate: () ==> seq of char
+		GetPlate() == return plate;
+		
+	public GetOwner: () ==> Client
+		GetOwner() == return owner;
+		
+	
 functions
 -- TODO Define functiones here
 traces
