@@ -1,0 +1,26 @@
+class ProviderEntity
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+	private name : seq of char;
+	private type : seq of char;
+	private address : seq of char;
+	private posX : real;
+	private posY : real;
+	private costByTime : real;
+	
+operations
+	public ProviderEntity: seq of char * seq of char * seq of char * real * real * real  ==> ProviderEntity
+	ProviderEntity(pName, pType, pAddress, pPosX, pPosY, pCostByTime) == (name := pName; type := pType; address := pAddress;  posX := pPosX;  posY := pPosY; costByTime := pCostByTime; return self)
+	post name = pName and type = pType and address = pAddress and posX = pPosX and posY = pPosY and costByTime = pCostByTime;
+	
+	public totalCost: real ==> real
+		totalCost(time) == return (costByTime * time);
+		
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end ProviderEntity

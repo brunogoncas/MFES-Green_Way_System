@@ -1,0 +1,18 @@
+class GreenWayManagement
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+	private clients: seq of Client;
+	
+operations
+	public GreenWayManagement: seq of Client ==> GreenWayManagement
+	GreenWayManagement(gClients) == (clients := gClients; return self)
+	post clients = gClients;
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end GreenWayManagement

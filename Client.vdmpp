@@ -20,9 +20,12 @@ operations
 	public addToDebt: real ==> ()
 		addToDebt(value) == debt := debt + value;
 		
+	public payDebt: real ==> ()
+		payDebt(value) == debt := debt - value;	
+		
 	public addDevice : Device  ==> ()
-		addDevice(cDevice) == devices := devices ^ [cDevice] 
-		post devices = devices~ ^ [cDevice];
+		addDevice(cDevice) == devices := [cDevice] ^ devices 
+		post devices = [cDevice] ^ devices~;
 		
 		
 	public getName: () ==> seq of char
