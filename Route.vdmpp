@@ -1,0 +1,33 @@
+class Route
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+	private entryPoint: ProviderEntity;
+	private exitPoint: ProviderEntity;
+	private timeElapsed : real; --in minutes
+
+operations
+	public Route: ProviderEntity ==> Route
+	Route(rEntryPoint) == (entryPoint := rEntryPoint; timeElapsed := 0; return self)
+	post entryPoint = rEntryPoint; 
+	
+	
+	public setExitPoint : ProviderEntity  ==> ()
+		setExitPoint(rExitPoint) == exitPoint := rExitPoint
+		post exitPoint = rExitPoint;
+		
+	public addTimeElapsed : real  ==> ()
+		addTimeElapsed(time) == timeElapsed := timeElapsed + time
+		post timeElapsed = timeElapsed + time;
+		
+		
+	public getValueToPay: () ==> real
+		getValueToPay() == return (entryPoint.getCostByTime()*timeElapsed);
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Route

@@ -9,15 +9,16 @@ instance variables
 	private address : seq of char;
 	private posX : real;
 	private posY : real;
-	private costByTime : real;
+	private costByTime : real; --in minutes
 	
 operations
 	public ProviderEntity: seq of char * seq of char * seq of char * real * real * real  ==> ProviderEntity
 	ProviderEntity(pName, pType, pAddress, pPosX, pPosY, pCostByTime) == (name := pName; type := pType; address := pAddress;  posX := pPosX;  posY := pPosY; costByTime := pCostByTime; return self)
 	post name = pName and type = pType and address = pAddress and posX = pPosX and posY = pPosY and costByTime = pCostByTime;
 	
-	public totalCost: real ==> real
-		totalCost(time) == return (costByTime * time);
+		
+	public getCostByTime: () ==> real
+		getCostByTime() == return costByTime;
 		
 functions
 -- TODO Define functiones here

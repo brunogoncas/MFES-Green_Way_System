@@ -5,11 +5,28 @@ values
 -- TODO Define values here
 instance variables
 	private clients: seq of Client;
+	private providers: seq of ProviderEntity;
 	
 operations
-	public GreenWayManagement: seq of Client ==> GreenWayManagement
-	GreenWayManagement(gClients) == (clients := gClients; return self)
-	post clients = gClients;
+	public GreenWayManagement: seq of Client * seq of ProviderEntity ==> GreenWayManagement
+	GreenWayManagement(gClients, gProviders) == (clients := gClients; providers := gProviders; return self)
+	post clients = gClients and providers = gProviders; 
+	
+	
+	public addClient : Client  ==> ()
+		addClient(gClient) == clients := [gClient] ^ clients 
+		post clients = [gClient] ^ clients~;
+		
+	public addProvider : ProviderEntity  ==> ()
+		addProvider(gProviders) == providers := [gProviders] ^ providers 
+		post providers = [gProviders] ^ providers~;
+		
+	
+	public getClients: () ==> seq of Client
+		getClients() == return clients;
+		
+	public getProviders: () ==> seq of ProviderEntity
+		getProviders() == return providers;	
 	
 functions
 -- TODO Define functiones here
