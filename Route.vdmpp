@@ -5,13 +5,13 @@ values
 -- TODO Define values here
 instance variables
 	private entryPoint: ProviderEntity;
-	private exitPoint: ProviderEntity;
+	private exitPoint: [ProviderEntity];
 	private timeElapsed : real; --in minutes
 
 operations
 	public Route: ProviderEntity ==> Route
-	Route(rEntryPoint) == (entryPoint := rEntryPoint; timeElapsed := 0; return self)
-	post entryPoint = rEntryPoint; 
+	Route(rEntryPoint) == (entryPoint := rEntryPoint; exitPoint := nil; timeElapsed := 0; return self)
+	post entryPoint = rEntryPoint and exitPoint = nil; 
 	
 	
 	public setExitPoint : ProviderEntity  ==> ()
@@ -23,8 +23,8 @@ operations
 		post timeElapsed = timeElapsed + time;
 		
 		
-	public getValueToPay: () ==> real
-		getValueToPay() == return (entryPoint.getCostByTime()*timeElapsed);
+	public pure getValueToPay: () ==> real
+		getValueToPay() == return (entryPoint.getCostByTime() * timeElapsed);
 	
 functions
 -- TODO Define functiones here

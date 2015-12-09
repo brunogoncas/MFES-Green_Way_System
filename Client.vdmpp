@@ -9,13 +9,16 @@ instance variables
 	private nif : nat;
 	private nib : nat;
 	private debt: real;
-	private devices: seq of Device;
+	private devices: set of Device;
+	
+	inv not exists c1, c2 in set devices &
+		c1 <> c2 and c1.GetPlate() = c2.GetPlate();
 	
 operations
-	public Client: seq of char * nat * nat * nat * seq of Device ==> Client
+	public Client: seq of char * nat * nat * nat * set of Device ==> Client
 	
-	Client(cName, cCC, cNif, cNib, cDevices) == (name := cName; cc := cCC; nif := cNif; nib := cNib; devices := cDevices; debt:=0; return self)
-	pre cName <> "" and devices <> []
+	Client(cName, cCC, cNif, cNib, cDevices) == (name := cName; cc := cCC; nif := cNif; nib := cNib; devices := cDevices; debt := 0; return self)
+	pre cName <> "" and cDevices <> {} /* missing pre conditions for the rest */
 	post name = cName and cc = cCC and nif = cNif and nib = cNib and devices = cDevices;
 	
 	
@@ -23,29 +26,30 @@ operations
 		addToDebt(value) == debt := debt + value;
 		
 	public payDebt: real ==> ()
-		payDebt(value) == debt := debt - value;	
+		payDebt(value) == debt := debt - value
+		pre value > 0 and debt >= 0
+		post value <= debt and debt >= 0;
 		
 	public addDevice : Device  ==> ()
-		addDevice(cDevice) == devices := [cDevice] ^ devices 
-		post devices = [cDevice] ^ devices~;
+		addDevice(cDevice) == devices := ({cDevice} union devices)
+		post devices = ({cDevice} union devices~);
 		
-		
-	public getName: () ==> seq of char
+	public pure getName: () ==> seq of char
 		getName() == return name;
 	
-	public getCc: () ==> real
+	public pure getCc: () ==> real
 		getCc() == return cc;
 		
-	public getNif: () ==> real
+	public pure getNif: () ==> real
 		getNif() == return nif;
 	
-	public getNib: () ==> real
+	public pure getNib: () ==> real
 		getNib() == return nib;
 	
-	public getDebt: () ==> real
+	public pure getDebt: () ==> real
 		getDebt() == return debt;
 		
-	public getDevices: () ==> seq of Device
+	public pure getDevices: () ==> set of Device
 		getDevices() == return devices;
 
 

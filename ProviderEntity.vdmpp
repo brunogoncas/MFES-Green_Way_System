@@ -17,7 +17,7 @@ operations
 	post name = pName and type = pType and address = pAddress and posX = pPosX and posY = pPosY and costByTime = pCostByTime;
 	
 		
-	public getCostByTime: () ==> real
+	public pure getCostByTime: () ==> real
 		getCostByTime() == return costByTime;
 		
 functions

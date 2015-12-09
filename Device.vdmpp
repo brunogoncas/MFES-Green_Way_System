@@ -8,14 +8,13 @@ instance variables
 	private car : seq of char;
 	private plate : seq of char;
 	private owner : Client;
-	private historic : seq of Route;
+	private historic : seq of Route := [];
 	
 	
 operations
 	public Device: seq of char * seq of char * seq of char * Client ==> Device
 	Device(dId, dCar, dPlate, dClient) == (id := dId; car := dCar; plate := dPlate; owner := dClient; return self)
 	post id = dId and car = dCar and plate = dPlate and owner = dClient;
-
 	
 	public addToHistoric : Route  ==> ()
 		addToHistoric(dRoute) == historic := [dRoute] ^ historic 
@@ -28,7 +27,7 @@ operations
 	public GetCar: () ==> seq of char
 		GetCar() == return car;
 			
-	public GetPlate: () ==> seq of char
+	public pure GetPlate: () ==> seq of char
 		GetPlate() == return plate;
 		
 	public GetOwner: () ==> Client
