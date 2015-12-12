@@ -1,0 +1,26 @@
+class Route
+
+instance variables
+
+	private entries : seq of HighwayRouteEntry := [];
+
+operations
+	public Route: () ==> Route
+		Route() == (return self);
+		
+	public addHighwayEntry : HighwayRouteEntry ==> ()
+		addHighwayEntry(entry) == entries := entries ^ [entry] 
+		post entries = entries~ ^ [entry];
+	
+	public pure getValueToPay: Vehicle ==> real
+		getValueToPay(v) == (
+			dcl value : real;
+			
+			for e in entries do
+				value := value + e.getHighway().calculatePrice(v, e.getKilometers());
+			
+			return value;
+		)
+		--	need post-condition for payment here too!
+		
+end Route
