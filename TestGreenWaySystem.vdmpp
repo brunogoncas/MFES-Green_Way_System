@@ -1,0 +1,35 @@
+class TestGreenWaySystem is subclass of MyTestCase
+
+operations
+
+----- Client Class Tests
+	public testClient:() ==> ()
+		testClient() == (
+		dcl c: Client := new Client("Joao",01234567,201206113,000000000000000000000);
+		assertEqual("Joao", c.getName());	
+		assertEqual(01234567, c.getCc());
+		assertEqual(201206113, c.getNif());
+		assertEqual(000000000000000000000, c.getNib());
+		assertEqual(0, c.getDebt()); 
+		assertEqual({} , c.getDevices());
+		);
+		
+	public testDebt:() ==> ()
+		testDebt() == (
+		dcl c: Client := new Client("Joao",01234567,201206113,000000000000000000000);
+		c.addToDebt(32.41);
+		assertEqual(32.41,c.getDebt());
+		c.payDebt(32);
+		assertEqual(0.41, c.getDebt());
+		);
+		
+	public testDevices:() ==> ()
+		testDevices() == (
+		dcl c: Client := new Client("Joao",01234567,201206113,000000000000000000000);
+		dcl v: Vehicle := new Vehicle("?", "1-1-1-1-",<II>);
+		dcl d: Device := new Device("Dispositivo1",v,c);
+		c.addDevice(d);
+		assertEqual({d},c.getDevices());
+		);
+----- Vehicle Class Tests
+end TestGreenWaySystem
