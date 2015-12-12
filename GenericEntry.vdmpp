@@ -2,16 +2,23 @@
 --	for things like mcdrive, gas, etc.
 
 class GenericEntry
-types
--- TODO Define types here
-values
--- TODO Define values here
+
 instance variables
--- TODO Define instance variables here
+
+	private val : real;
+
 operations
--- TODO Define operations here
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
+
+	public GenericEntry : real ==> GenericEntry
+	
+		GenericEntry(value) == (val := value; return self)
+	
+		pre value >= 0
+		post val = value;
+	
+	-- Getters
+	
+	public getValue: () ==> real
+		getValue() == return val;
+
 end GenericEntry

@@ -1,11 +1,5 @@
 class Park is subclass of ProviderEntity
 
-types
--- TODO Define types here
-
-values
--- TODO Define values here
-
 instance variables
 	
 	private pricePerMinute : real := 0;
@@ -20,11 +14,5 @@ operations
 		setCostPerMinute(cpm) == pricePerMinute := cpm
 		pre cpm > 0
 		post pricePerMinute = cpm;
-	
-functions
--- TODO Define functiones here
-
-traces
--- TODO Define Combinatorial Test Traces here
 
 end Park

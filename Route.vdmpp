@@ -1,4 +1,4 @@
-class Route
+class Route is subclass of GenericEntry
 
 instance variables
 

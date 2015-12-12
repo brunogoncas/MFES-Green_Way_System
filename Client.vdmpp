@@ -15,12 +15,11 @@ instance variables
 		c1 <> c2 and c1.GetPlate() = c2.GetPlate();
 	
 operations
+
 	public Client: seq of char * nat * nat * nat * set of Device ==> Client
-	
-	Client(cName, cCC, cNif, cNib, cDevices) == (name := cName; cc := cCC; nif := cNif; nib := cNib; devices := cDevices; debt := 0; return self)
-	pre cName <> "" and cDevices <> {} -- missing pre conditions for the rest
-	post name = cName and cc = cCC and nif = cNif and nib = cNib and devices = cDevices;
-	
+		Client(cName, cCC, cNif, cNib, cDevices) == (name := cName; cc := cCC; nif := cNif; nib := cNib; devices := cDevices; debt := 0; return self)
+		pre cName <> "" and cDevices <> {} -- missing pre conditions for the rest
+		post name = cName and cc = cCC and nif = cNif and nib = cNib and devices = cDevices;	
 	
 	public addToDebt: real ==> ()
 		addToDebt(value) == debt := debt + value;

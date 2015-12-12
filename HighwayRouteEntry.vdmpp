@@ -11,12 +11,9 @@ types
 									minute : nat
 									second : nat
 	
-	inv mk_Date(y, mo, d, h, mi, s) == mo <= 12 and d <= 31 and h <= 23 and mi <= 59 and s <= 59;
+	inv mk_Date(y, mo, d, h, mi, s) == y >= 0 and mo <= 12 and d <= 31 and h <= 23 and mi <= 59 and s <= 59;
 
-values
--- TODO Define values here
 instance variables
--- TODO Define instance variables here
 
 	private hw : Highway;
 	private km : real;
@@ -27,10 +24,10 @@ operations
 
 	public HighwayRouteEntry: Highway * real * Date * Date ==> HighwayRouteEntry
 	
-	HighwayRouteEntry(highway, kilometers, entryDate, exitDate) == (hw := highway; km := kilometers; entryD := entryDate; exitD := exitDate; return self)
+		HighwayRouteEntry(highway, kilometers, entryDate, exitDate) == (hw := highway; km := kilometers; entryD := entryDate; exitD := exitDate; return self)
 	
-	pre km > 0
-	post hw = highway and km = kilometers and entryD = entryDate and exitD = exitDate;
+		pre km > 0
+		post hw = highway and km = kilometers and entryD = entryDate and exitD = exitDate;
 	
 	-- Getters
 	
@@ -46,10 +43,4 @@ operations
 	public pure getExitDate: () ==> Date
 		getExitDate() == return exitD;
 	
-	-- Setters
-
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
 end HighwayRouteEntry

@@ -4,11 +4,8 @@ types
 
 	public String = seq of char
 
-values
-
--- TODO Define values here
-
 instance variables
+
 	private name : String;
 	
 	private baseRate : real;
@@ -38,8 +35,5 @@ public MultiplierForClass: Vehicle`Class -> real
 			<V> -> 0.5
 		end
 	)
-
-traces
--- TODO Define Combinatorial Test Traces here
 
 end Highway
