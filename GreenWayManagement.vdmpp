@@ -12,7 +12,6 @@ operations
 	GreenWayManagement(gClients, gProviders) == (clients := gClients; providers := gProviders; return self)
 	post clients = gClients and providers = gProviders; 
 	
-	
 	public addClient : Client  ==> ()
 		addClient(gClient) == clients := [gClient] ^ clients 
 		post clients = [gClient] ^ clients~;

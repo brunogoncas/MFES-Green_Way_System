@@ -9,17 +9,17 @@ instance variables
 	private nif : nat;
 	private nib : nat;
 	private debt: real;
-	private devices: set of Device;
+	private devices: set of Device := {};
 	
 	inv not exists c1, c2 in set devices &
-		c1 <> c2 and c1.GetPlate() = c2.GetPlate();
+		c1 <> c2 and c1.getVehicle() = c2.getVehicle();
 	
 operations
 
-	public Client: seq of char * nat * nat * nat * set of Device ==> Client
-		Client(cName, cCC, cNif, cNib, cDevices) == (name := cName; cc := cCC; nif := cNif; nib := cNib; devices := cDevices; debt := 0; return self)
-		pre cName <> "" and cDevices <> {} -- missing pre conditions for the rest
-		post name = cName and cc = cCC and nif = cNif and nib = cNib and devices = cDevices;	
+	public Client: seq of char * nat * nat * nat ==> Client
+		Client(cName, cCC, cNif, cNib) == (name := cName; cc := cCC; nif := cNif; nib := cNib; debt := 0; return self)
+		pre cName <> "" -- missing pre conditions for the rest
+		post name = cName and cc = cCC and nif = cNif and nib = cNib;	
 	
 	public addToDebt: real ==> ()
 		addToDebt(value) == debt := debt + value;

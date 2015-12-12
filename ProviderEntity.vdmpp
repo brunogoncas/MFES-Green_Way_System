@@ -12,7 +12,6 @@ instance variables
 	private posX : real;
 	private posY : real;
 	
-	
 operations
 	
 	public ProviderEntity: seq of char * seq of char * seq of char * real * real  ==> ProviderEntity

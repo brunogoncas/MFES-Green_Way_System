@@ -1,33 +1,33 @@
 class Device
 
+types
+	
+	public String = seq of char;
+
 instance variables
 
-	private id : seq of char;
-	private car : seq of char;
-	private plate : seq of char;
+	private id : String;
+	private vehicle : Vehicle;
 	private owner : Client;
 	private history : seq of GenericEntry := [];
 	
 operations
 
-	public Device: seq of char * seq of char * seq of char * Client ==> Device
-		Device(dId, dCar, dPlate, dClient) == (id := dId; car := dCar; plate := dPlate; owner := dClient; return self)
-		post id = dId and car = dCar and plate = dPlate and owner = dClient;
+	public Device: String * Vehicle * Client ==> Device
+		Device(dId, dVehicle, dOwner) == (id := dId; vehicle := dVehicle; owner := dOwner; return self)
+		post id = dId and vehicle = dVehicle and owner = dOwner;
 	
 	public addToHistory : GenericEntry ==> ()
 		addToHistory(dEntry) == history := [dEntry] ^ history 
 		post history = [dEntry] ^ history~;
 	
-	public GetId: () ==> seq of char
-		GetId() == return id;
+	public pure getId: () ==> String
+		getId() == return id;
 			
-	public GetCar: () ==> seq of char
-		GetCar() == return car;
+	public pure getVehicle: () ==> Vehicle
+		getVehicle() == return vehicle;
 			
-	public pure GetPlate: () ==> seq of char
-		GetPlate() == return plate;
-		
-	public GetOwner: () ==> Client
-		GetOwner() == return owner;
+	public pure getOwner: () ==> Client
+		getOwner() == return owner;
 		
 end Device
