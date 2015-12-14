@@ -55,8 +55,9 @@ operations
 			dcl c: Client := new Client("Joao", 01234567,201206113, 000000000000000000000);
 			dcl v: Vehicle := new Vehicle("?", "1-1-1-1-", <II>);
 			dcl d: Device := new Device("Dispositivo1", v, c);
+			dcl p : Park := new Park("Aliados", "Avenida dos Aliados", 2);
 			
-			dcl mcDrive : GenericEntry := new GenericEntry(500);
+			dcl mcDrive : GenericEntry := new GenericEntry(500, p);
 			
 			d.addToHistory(mcDrive);
 			
@@ -68,7 +69,8 @@ operations
 	public testGenericEntry_Create : () ==> ()
 		testGenericEntry_Create() == (
 			dcl v: Vehicle := new Vehicle("?", "1-1-1-1-", <II>);
-			dcl g : GenericEntry := new GenericEntry(500);
+			dcl p : Park := new Park("Aliados", "Avenida dos Aliados", 2);
+			dcl g : GenericEntry := new GenericEntry(500, p);
 			
 			assertEqual(500, g.getValueToPay(v));
 		);
@@ -104,8 +106,8 @@ operations
 	public testGreenWayManagement_AddProvider : () ==> ()
 		testGreenWayManagement_AddProvider() == (
 			dcl m : GreenWayManagement := new GreenWayManagement();
-			dcl p: Park := new Park("Parque Ciloauto", "Rua Augusto Freitas",0.02);
-			dcl h : Highway := new Highway("A41", 50, 20, 120);
+			dcl p: Park := new Park("Parque Ciloauto", "Rua Augusto Freitas", 2);
+			dcl h : Highway := new Highway("A41", 50, 20);
 			
 			m.addProvider(p);
 			m.addProvider(h);
@@ -116,8 +118,8 @@ operations
 		public testGreenWayManagement_RemoveProvider : () ==> ()
 		testGreenWayManagement_RemoveProvider() == (
 			dcl m : GreenWayManagement := new GreenWayManagement();
-			dcl p: Park := new Park("Parque Ciloauto", "Rua Augusto Freitas",0.02);
-			dcl h : Highway := new Highway("A41", 50, 20, 120);
+			dcl p: Park := new Park("Parque Ciloauto", "Rua Augusto Freitas", 2);
+			dcl h : Highway := new Highway("A41", 50, 20);
 			
 			m.addProvider(p);
 			m.addProvider(h);
@@ -132,17 +134,16 @@ operations
 
 	public testHighway_Create : () ==> ()
 		testHighway_Create() == (
-			dcl h : Highway := new Highway("A41", 50, 20, 120);
+			dcl h : Highway := new Highway("A41", 50, 20);
 			
 			assertEqual("A41", h.getName());
 			assertEqual(50, h.getBaseRate());
 			assertEqual(20, h.getLength());
-			assertEqual(120, h.getMaxSpeed());
 		);
 	
 	public testHighway_CalculatePrice : () ==> ()
 		testHighway_CalculatePrice() == (
-			dcl h : Highway := new Highway("A41", 50, 20, 120);
+			dcl h : Highway := new Highway("A41", 50, 20);
 			
 			dcl v1: Vehicle := new Vehicle("?", "1-1-1-1-", <I>);
 			dcl v2: Vehicle := new Vehicle("?", "1-1-1-1-", <II>);
@@ -155,10 +156,10 @@ operations
 
 	public testHighwayRouteEntry_Create : () ==> ()
 		testHighwayRouteEntry_Create() == (
-		dcl entryDate : Date := new Date(12,51,0,12,12,2012);
-    dcl exitDate : Date := new Date(13,00,0,12,12,2012);
-    dcl hw : Highway := new Highway("A42", 12.3,20,120);
-    dcl hre : HighwayRouteEntry := new HighwayRouteEntry(hw,7.0,entryDate,exitDate);
+		dcl entryDate : Date := new Date(12, 51, 0, 12, 12, 2012);
+    dcl exitDate : Date := new Date(13, 00, 0, 12, 12, 2012);
+    dcl hw : Highway := new Highway("A42", 12.3, 20);
+    dcl hre : HighwayRouteEntry := new HighwayRouteEntry(hw, 7.0, entryDate, exitDate);
     
     assertEqual(hw, hre.getHighway());
     assertEqual(7.0, hre.getKilometers());
@@ -188,11 +189,9 @@ operations
 
 	public testRoute_Create: () ==> ()
 		testRoute_Create() == (
-			dcl r : Route := new Route();
-			--	add a HighwayRouteEntry
 			dcl entryDate : Date := new Date(12,51,0,12,12,2012);
    		dcl exitDate : Date := new Date(13,00,0,12,12,2012);
-    	dcl hw : Highway := new Highway("A42", 12.3,20,120);
+    	dcl hw : Highway := new Highway("A42", 12.3, 20);
     	dcl hre : HighwayRouteEntry := new HighwayRouteEntry(hw,7.0,entryDate,exitDate);
     	dcl route : Route := new Route();
     	route.addHighwayEntry(hre);

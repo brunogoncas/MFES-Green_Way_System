@@ -4,8 +4,6 @@ types
 
 	public String = seq of char;
 	
-	
-	
 instance variables
 
 	private hw : Highway;
@@ -18,9 +16,8 @@ operations
 	public HighwayRouteEntry: Highway * real * Date * Date ==> HighwayRouteEntry
 	
 		HighwayRouteEntry(highway, kilometers, entryDate, exitDate) == (hw := highway; km := kilometers; entryD := entryDate; exitD := exitDate; return self)
-	
-		pre kilometers > 0
-		post hw = highway and km = kilometers and entryD = entryDate and exitD = exitDate;
+			pre kilometers > 0
+			post hw = highway and km = kilometers and entryD = entryDate and exitD = exitDate;
 	
 	-- Getters
 	
@@ -35,16 +32,5 @@ operations
 	
 	public pure getExitDate: () ==> Date
 		getExitDate() == return exitD;
-	
-functions
-	
-	/*
-	
-	public makeDate: nat1 * nat1 * nat1 * nat * nat * nat -> Date
-		makeDate(y, mo, d, h, mi, s) == mk_Date(y, mo, d, h, mi, s);
-	
-	*/
-	
-	-- I have no idea how to create a date object, so I can't test much. Sorry.
 	
 end HighwayRouteEntry

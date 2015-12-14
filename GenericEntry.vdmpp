@@ -6,19 +6,22 @@ class GenericEntry is subclass of Entry
 instance variables
 
 	private val : real;
+	private ent : ProviderEntity;
 
 operations
 
-	public GenericEntry : real ==> GenericEntry
+	public GenericEntry : real * ProviderEntity ==> GenericEntry
 	
-		GenericEntry(value) == (val := value; return self)
-	
-		pre value >= 0
-		post val = value;
+		GenericEntry(value, entity) == (val := value; ent := entity; return self)
+			pre value >= 0
+			post val = value;
 	
 	-- Getters
 	
 	public pure getValueToPay: Vehicle ==> real
 		getValueToPay(v) == return val;	--	How do I supress this?
+	
+	public pure getProvider : () ==> ProviderEntity
+		getProvider() == return ent;
 
 end GenericEntry
