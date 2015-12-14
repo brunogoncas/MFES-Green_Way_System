@@ -125,13 +125,19 @@ operations
 		);
 
 -----	HighwayRouteEntry Class Tests
-	
-	--	idk how to create a date!
 
-	/*public testHighwayRouteEntry_Create : () ==> ()
+	public testHighwayRouteEntry_Create : () ==> ()
 		testHighwayRouteEntry_Create() == (
-						
-		);*/
+		dcl entryDate : Date := new Date(12,51,0,12,12,2012);
+    dcl exitDate : Date := new Date(13,00,0,12,12,2012);
+    dcl hw : Highway := new Highway("A42", 12.3,20,120);
+    dcl hre : HighwayRouteEntry := new HighwayRouteEntry(hw,7.0,entryDate,exitDate);
+    
+    assertEqual(hw, hre.getHighway());
+    assertEqual(7.0, hre.getKilometers());
+    assertEqual(entryDate, hre.getEntryDate());
+    assertEqual(exitDate, hre.getExitDate());
+    );
 
 -----	Park Class Tests
 
@@ -156,11 +162,30 @@ operations
 	public testRoute_Create: () ==> ()
 		testRoute_Create() == (
 			dcl r : Route := new Route();
-			
 			--	add a HighwayRouteEntry
-			
-			--	test pricing
-		)
+			dcl entryDate : Date := new Date(12,51,0,12,12,2012);
+   		dcl exitDate : Date := new Date(13,00,0,12,12,2012);
+    	dcl hw : Highway := new Highway("A42", 12.3,20,120);
+    	dcl hre : HighwayRouteEntry := new HighwayRouteEntry(hw,7.0,entryDate,exitDate);
+    	dcl route : Route := new Route();
+    	route.addHighwayEntry(hre);
+    	
+    	assertEqual([hre], route.getEntries());
+		);
+		
+--	public testRoute_PriceCalc: () ==> ()
+--		testRoute_PriceCalc() == (
+--			dcl r : Route := new Route();
+--			--	add a HighwayRouteEntry
+--			dcl entryDate : Date := new Date(12,51,0,12,12,2012);
+--   		dcl exitDate : Date := new Date(13,00,0,12,12,2012);
+--    	dcl hw : Highway := new Highway("A42", 12.3,20,120);
+--    	dcl hre : HighwayRouteEntry := new HighwayRouteEntry(hw,7.0,entryDate,exitDate);
+--    	dcl route : Route := new Route();
+    	
+--    	assertEqual([hre], route.getEntries());
+--		);
+	
 		
 ----- Vehicle Class Tests
 

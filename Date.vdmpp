@@ -1,0 +1,26 @@
+class Date
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+	
+	private day : nat1;
+	private month : nat1;
+	private year : nat;
+	private hour : nat;
+	private minute : nat;
+	private second : nat;
+	
+inv day <= 31 and hour <= 24 and minute <=59 and second <= 59 and month <= 12 and if month in set {4, 6, 9, 11} then day <= 30 else (month = 2) => (day <= 29)
+operations
+-- TODO Define operations here
+	public Date: nat * nat * nat * nat1 * nat1 * nat ==> Date
+		Date(dHour, dMinute, dSecond, dDay, dMonth, dYear) == (hour := dHour; minute:=dMinute; second:=dSecond; day:=dDay; month:=dMonth; year:=dYear; return self)
+		pre dDay >0 and dDay <=31 and dMonth >=1 and dMonth <=12 and dYear >= 0 and dHour >= 0 and dHour <=24 and dMinute >= 0 and dMinute <= 59 and dSecond >= 0 and dSecond <= 59
+		post day = dDay and month = dMonth and year = dYear and hour = dHour and minute = dMinute and second = dSecond;
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Date

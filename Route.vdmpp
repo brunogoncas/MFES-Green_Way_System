@@ -12,6 +12,9 @@ operations
 		addHighwayEntry(entry) == entries := entries ^ [entry] 
 		post entries = entries~ ^ [entry];
 	
+	public pure getEntries: () ==> seq of HighwayRouteEntry
+		getEntries() == return entries;
+	
 	public pure getValueToPay: Vehicle ==> real
 		getValueToPay(v) == (
 			dcl value : real;
