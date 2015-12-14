@@ -4,12 +4,12 @@ instance variables
 
 	private name : String;
 	
-	private baseRate : real;
+	private baseRate : nat;
 	private length : real;
 	
 operations
 	
-	public Highway : String * real * real ==> Highway
+	public Highway : String * nat * real ==> Highway
 		Highway(hName, hBaseRate, hLength) == (name := hName; baseRate := hBaseRate; length := hLength; return self)
 		pre (len hName > 0) and hBaseRate > 0 and hLength > 0
 		post name = hName and baseRate = hBaseRate and length = hLength;
@@ -17,13 +17,13 @@ operations
 	public pure getName: () ==> String
 		getName() == return name;
 	
-	public pure getBaseRate: () ==> real
+	public pure getBaseRate: () ==> nat
 		getBaseRate() == return baseRate;
 	
 	public pure getLength: () ==> real
 		getLength() == return length;
 	
-	public pure calculatePrice: Vehicle * real ==> real
+	public pure calculatePrice: Vehicle * nat ==> nat
 		calculatePrice(v, l) == return (Highway`MultiplierForClass(v.getClass()) * l * baseRate)
 		pre l > 0
 		post Highway`MultiplierForClass(v.getClass()) * l * baseRate > 0;

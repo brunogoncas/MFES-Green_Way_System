@@ -73,6 +73,7 @@ operations
 			dcl g : GenericEntry := new GenericEntry(500, p);
 			
 			assertEqual(500, g.getValueToPay(v));
+			assertEqual(p, g.getProvider());
 		);
 		
 -----	GreenWayManagement Class Tests
@@ -174,6 +175,8 @@ operations
 			dcl p : Park := new Park("Aliados", "Avenida dos Aliados", 2);
 			
 			assertEqual(2, p.getCostPerMinute());
+			assertEqual("Aliados", p.getName());
+			assertEqual("Avenida dos Aliados", p.getAddress());
 		);
 	
 	public testPark_ChangeCost : () ==> ()
@@ -199,19 +202,18 @@ operations
     	assertEqual([hre], route.getEntries());
 		);
 		
---	public testRoute_PriceCalc: () ==> ()
---		testRoute_PriceCalc() == (
---			dcl r : Route := new Route();
---			--	add a HighwayRouteEntry
---			dcl entryDate : Date := new Date(12,51,0,12,12,2012);
---   		dcl exitDate : Date := new Date(13,00,0,12,12,2012);
---    	dcl hw : Highway := new Highway("A42", 12.3,20,120);
---    	dcl hre : HighwayRouteEntry := new HighwayRouteEntry(hw,7.0,entryDate,exitDate);
---    	dcl route : Route := new Route();
+	public testRoute_PriceCalc: () ==> ()
+		testRoute_PriceCalc() == (
+			dcl v: Vehicle := new Vehicle("?", "1-1-1-1-", <II>);
+			dcl entryDate : Date := new Date(12, 51, 0, 12, 12, 2012);
+			dcl exitDate : Date := new Date(13, 00, 0, 12, 12, 2012);
+			dcl hw : Highway := new Highway("A42", 20, 12.3);
+			dcl hre : HighwayRouteEntry := new HighwayRouteEntry(hw, 7.0, entryDate, exitDate);
+			dcl route : Route := new Route();
+			route.addHighwayEntry(hre);
     	
---    	assertEqual([hre], route.getEntries());
---		);
-	
+			assertEqual(280, route.getValueToPay(v));
+		);
 		
 ----- Vehicle Class Tests
 

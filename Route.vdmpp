@@ -15,9 +15,9 @@ operations
 	public pure getEntries: () ==> seq of HighwayRouteEntry
 		getEntries() == return entries;
 	
-	public pure getValueToPay: Vehicle ==> real
+	public pure getValueToPay: Vehicle ==> nat
 		getValueToPay(v) == (
-			dcl value : real := 0.0;
+			dcl value : nat := 0.0;
 			
 			for e in entries do
 				value := value + e.getHighway().calculatePrice(v, e.getKilometers());
