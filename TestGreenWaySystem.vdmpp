@@ -125,12 +125,42 @@ operations
 		);
 
 -----	HighwayRouteEntry Class Tests
+	
+	--	idk how to create a date!
+
+	/*public testHighwayRouteEntry_Create : () ==> ()
+		testHighwayRouteEntry_Create() == (
+						
+		);*/
 
 -----	Park Class Tests
 
------	ProviderEntity Class Tests
+	public testPark_Create : () ==> ()
+		testPark_Create() == (
+			dcl p : Park := new Park("Aliados", "Avenida dos Aliados", 2);
+			
+			assertEqual(2, p.getCostPerMinute());
+		);
+	
+	public testPark_ChangeCost : () ==> ()
+		testPark_ChangeCost() == (
+			dcl p : Park := new Park("Aliados", "Avenida dos Aliados", 2);
+			
+			p.setCostPerMinute(5);
+			
+			assertEqual(5, p.getCostPerMinute());
+		);
 
 -----	Route Class Tests
+
+	public testRoute_Create: () ==> ()
+		testRoute_Create() == (
+			dcl r : Route := new Route();
+			
+			--	add a HighwayRouteEntry
+			
+			--	test pricing
+		)
 		
 ----- Vehicle Class Tests
 

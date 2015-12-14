@@ -1,10 +1,12 @@
 class Client
+
 types
--- TODO Define types here
-values
--- TODO Define values here
+
+	public String = seq of char;
+
 instance variables
-	private name : seq of char;
+
+	private name : String;
 	private cc : nat;
 	private nif : nat;
 	private nib : nat;
@@ -18,7 +20,7 @@ operations
 
 	public Client: seq of char * nat * nat * nat ==> Client
 		Client(cName, cCC, cNif, cNib) == (name := cName; cc := cCC; nif := cNif; nib := cNib; debt := 0; return self)
-		pre cName <> "" -- missing pre conditions for the rest
+		pre (len cName > 0) and cCC > 0 and cNif > 0 and cNib > 0
 		post name = cName and cc = cCC and nif = cNif and nib = cNib;	
 	
 	public addToDebt: real ==> ()
@@ -51,9 +53,4 @@ operations
 	public pure getDevices: () ==> set of Device
 		getDevices() == return devices;
 
-
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
 end Client

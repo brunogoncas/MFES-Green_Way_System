@@ -21,7 +21,7 @@ operations
 	
 	Vehicle(vMake, vPlate, vClass) == (make := vMake; plate := vPlate; cl := vClass; return self)
 	
-	pre vMake <> "" and vPlate <> ""
+	pre (len vMake > 0) and (len vPlate > 0)
 	post make = vMake and plate = vPlate and cl = vClass;
 	
 -- Getters

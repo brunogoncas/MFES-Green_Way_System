@@ -2,9 +2,22 @@ class Park is subclass of ProviderEntity
 
 instance variables
 	
+	private name : String;
+	private address : String;
 	private pricePerMinute : real := 0;
 	
 operations
+
+	public Park : String * String * real ==> Park
+		Park(n, a, ppm) == (name := n; address := a; pricePerMinute := ppm; return self)
+		pre (len n > 0) and (len a > 0) and (ppm > 0)
+		post name = n and address = a and pricePerMinute = ppm;
+		
+	public pure getName: () ==> String
+		getName() == return name;
+		
+	public pure getAddress: () ==> String
+		getAddress() == return address;
 	
 	public pure getCostPerMinute: () ==> real
 		getCostPerMinute() == return pricePerMinute

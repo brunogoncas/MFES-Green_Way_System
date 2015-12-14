@@ -3,19 +3,10 @@ class ProviderEntity
 types
 
 	public String = seq of char
-
-instance variables
-	
-	private name : String;
-	private type : String;
-	private address : String;
-	private posX : real;
-	private posY : real;
 	
 operations
 	
-	public ProviderEntity: seq of char * seq of char * seq of char * real * real  ==> ProviderEntity
-		ProviderEntity(pName, pType, pAddress, pPosX, pPosY) == (name := pName; type := pType; address := pAddress; posX := pPosX;  posY := pPosY; return self)
-		post name = pName and type = pType and address = pAddress and posX = pPosX and posY = pPosY;
+	public pure getName: () ==> String
+		getName() == is subclass responsibility;
 		
 end ProviderEntity

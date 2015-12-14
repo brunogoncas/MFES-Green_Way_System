@@ -1,9 +1,5 @@
 class Highway is subclass of ProviderEntity
 
-types
-
-	public String = seq of char
-
 instance variables
 
 	private name : String;
@@ -16,7 +12,7 @@ operations
 	
 	public Highway : String * real * real * real ==> Highway
 		Highway(hName, hBaseRate, hLength, hMaxSpeed) == (name := hName; baseRate := hBaseRate; length := hLength; maxSpeed := hMaxSpeed; return self)
-		pre hName <> "" and hBaseRate > 0 and hLength > 0 and hMaxSpeed > 0
+		pre (len hName > 0) and hBaseRate > 0 and hLength > 0 and hMaxSpeed > 0
 		post name = hName and baseRate = hBaseRate and length = hLength and maxSpeed = hMaxSpeed;
 	
 	public pure getName: () ==> String
