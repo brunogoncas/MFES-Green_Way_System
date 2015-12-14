@@ -8,7 +8,7 @@ instance variables
 	private cc : nat;
 	private nif : nat;
 	private nib : nat;
-	private debt: real;
+	private debt: nat; -- In cents!
 	private devices: set of Device := {};
 	
 	inv not exists c1, c2 in set devices &
@@ -24,10 +24,10 @@ operations
 	public addToDebt: real ==> ()
 		addToDebt(value) == debt := debt + value;
 		
-	public payDebt: real ==> ()
+	public payDebt: nat ==> ()
 		payDebt(value) == debt := debt - value
 		pre value > 0 and debt >= 0
-		post value <= debt and debt >= 0;
+		post value <= debt~ and debt >= 0;
 		
 	public addDevice : Device  ==> ()
 		addDevice(cDevice) == devices := ({cDevice} union devices)
@@ -45,7 +45,7 @@ operations
 	public pure getNib: () ==> real
 		getNib() == return nib;
 	
-	public pure getDebt: () ==> real
+	public pure getDebt: () ==> nat
 		getDebt() == return debt;
 		
 	public pure getDevices: () ==> set of Device

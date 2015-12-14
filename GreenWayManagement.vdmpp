@@ -1,34 +1,35 @@
 class GreenWayManagement
-types
--- TODO Define types here
-values
--- TODO Define values here
+
 instance variables
-	private clients: seq of Client;
-	private providers: seq of ProviderEntity;
+
+	private clients: set of Client := {};
+	private providers: set of ProviderEntity := {};
 	
 operations
-	public GreenWayManagement: seq of Client * seq of ProviderEntity ==> GreenWayManagement
-	GreenWayManagement(gClients, gProviders) == (clients := gClients; providers := gProviders; return self)
-	post clients = gClients and providers = gProviders; 
+
+	public GreenWayManagement: () ==> GreenWayManagement
+		GreenWayManagement() == return self; 
 	
-	public addClient : Client  ==> ()
-		addClient(gClient) == clients := [gClient] ^ clients 
-		post clients = [gClient] ^ clients~;
+	public addClient : Client ==> ()
+		addClient(gClient) == clients := ({gClient} union clients)
+		post clients = ({gClient} union clients~);
 		
 	public addProvider : ProviderEntity  ==> ()
-		addProvider(gProviders) == providers := [gProviders] ^ providers 
-		post providers = [gProviders] ^ providers~;
-		
+		addProvider(gProvider) == providers := ({gProvider} union providers)
+		post providers = ({gProvider} union providers~);
 	
-	public getClients: () ==> seq of Client
+	public removeClient : Client ==> ()
+		removeClient(gClient) == clients := (clients \ {gClient})
+		post gClient not in set clients;
+	
+	public removeProvider : ProviderEntity ==> ()
+		removeProvider(gProvider) == providers := (providers \ {gProvider})
+		post gProvider not in set providers;
+		
+	public getClients: () ==> set of Client
 		getClients() == return clients;
 		
-	public getProviders: () ==> seq of ProviderEntity
+	public getProviders: () ==> set of ProviderEntity
 		getProviders() == return providers;	
-	
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
+		
 end GreenWayManagement

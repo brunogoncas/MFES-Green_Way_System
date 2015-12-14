@@ -1,7 +1,7 @@
 --	generic entry
 --	for things like mcdrive, gas, etc.
 
-class GenericEntry
+class GenericEntry is subclass of Entry
 
 instance variables
 
@@ -18,7 +18,7 @@ operations
 	
 	-- Getters
 	
-	public getValue: () ==> real
-		getValue() == return val;
+	public pure getValueToPay: Vehicle ==> real
+		getValueToPay(v) == return val;	--	How do I supress this?
 
 end GenericEntry

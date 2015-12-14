@@ -3,33 +3,144 @@ class TestGreenWaySystem is subclass of MyTestCase
 operations
 
 ----- Client Class Tests
-	public testClient:() ==> ()
-		testClient() == (
-		dcl c: Client := new Client("Joao",01234567,201206113,000000000000000000000);
-		assertEqual("Joao", c.getName());	
-		assertEqual(01234567, c.getCc());
-		assertEqual(201206113, c.getNif());
-		assertEqual(000000000000000000000, c.getNib());
-		assertEqual(0, c.getDebt()); 
-		assertEqual({} , c.getDevices());
+
+	public testClient_Create:() ==> ()
+		testClient_Create() == (
+			dcl c: Client := new Client("Joao", 01234567, 201206113, 000000000000000000000);
+			
+			assertEqual("Joao", c.getName());	
+			assertEqual(01234567, c.getCc());
+			assertEqual(201206113, c.getNif());
+			assertEqual(000000000000000000000, c.getNib());
+			assertEqual(0, c.getDebt()); 
+			assertEqual({}, c.getDevices());
 		);
 		
-	public testDebt:() ==> ()
-		testDebt() == (
-		dcl c: Client := new Client("Joao",01234567,201206113,000000000000000000000);
-		c.addToDebt(32.41);
-		assertEqual(32.41,c.getDebt());
-		c.payDebt(32);
-		assertEqual(0.41, c.getDebt());
+	public testClient_Debt:() ==> ()
+		testClient_Debt() == (
+			dcl c: Client := new Client("Joao", 01234567, 201206113, 000000000000000000000);
+		
+			c.addToDebt(3241);
+			assertEqual(3241, c.getDebt());
+		
+			c.payDebt(3200);
+			assertEqual(41, c.getDebt());
 		);
 		
-	public testDevices:() ==> ()
-		testDevices() == (
-		dcl c: Client := new Client("Joao",01234567,201206113,000000000000000000000);
-		dcl v: Vehicle := new Vehicle("?", "1-1-1-1-",<II>);
-		dcl d: Device := new Device("Dispositivo1",v,c);
-		c.addDevice(d);
-		assertEqual({d},c.getDevices());
+	public testClient_Devices:() ==> ()
+		testClient_Devices() == (
+			dcl c: Client := new Client("Joao", 01234567,201206113, 000000000000000000000);
+			dcl v: Vehicle := new Vehicle("?", "1-1-1-1-", <II>);
+			dcl d: Device := new Device("Dispositivo1", v, c);
+			
+			c.addDevice(d);
+			assertEqual({d}, c.getDevices());
 		);
+
+-----	Device Class Tests
+
+	public testDevice_Create: () ==> ()
+		testDevice_Create() == (
+			dcl c: Client := new Client("Joao", 01234567,201206113, 000000000000000000000);
+			dcl v: Vehicle := new Vehicle("?", "1-1-1-1-", <II>);
+			dcl d: Device := new Device("Dispositivo1", v, c);
+			
+			assertEqual("Dispositivo1", d.getId());
+			assertEqual(v, d.getVehicle());
+			assertEqual(c, d.getOwner());
+		);
+	
+	public testDevice_History: () ==> ()
+		testDevice_History() == (
+			dcl c: Client := new Client("Joao", 01234567,201206113, 000000000000000000000);
+			dcl v: Vehicle := new Vehicle("?", "1-1-1-1-", <II>);
+			dcl d: Device := new Device("Dispositivo1", v, c);
+			
+			dcl mcDrive : GenericEntry := new GenericEntry(500);
+			
+			d.addToHistory(mcDrive);
+			
+			assertEqual([mcDrive], d.getHistory());
+		);
+		
+-----	GenericEntry Class Tests
+
+	public testGenericEntry_Create : () ==> ()
+		testGenericEntry_Create() == (
+			dcl v: Vehicle := new Vehicle("?", "1-1-1-1-", <II>);
+			dcl g : GenericEntry := new GenericEntry(500);
+			
+			assertEqual(500, g.getValueToPay(v));
+		);
+		
+-----	GreenWayManagement Class Tests
+	
+	public testGreenWayManagement_AddClient : () ==> ()
+		testGreenWayManagement_AddClient() == (
+			dcl m : GreenWayManagement := new GreenWayManagement();
+			dcl c: Client := new Client("Joao", 01234567, 201206113, 000000000000000000000);
+			dcl d: Client := new Client("Joaquim", 01234567, 201206113, 000000000000000000000);
+			
+			m.addClient(c);
+			m.addClient(d);
+			
+			assertEqual({c, d}, m.getClients());
+		);
+	
+	public testGreenWayManagement_RemoveClient : () ==> ()
+		testGreenWayManagement_RemoveClient() == (
+			dcl m : GreenWayManagement := new GreenWayManagement();
+			dcl c: Client := new Client("Joao", 01234567, 201206113, 000000000000000000000);
+			dcl d: Client := new Client("Joaquim", 01234567, 201206113, 000000000000000000000);
+			
+			m.addClient(c);
+			m.addClient(d);
+			
+			m.removeClient(c);
+			
+			assertEqual({d}, m.getClients());
+		);
+
+-----	Highway Class Tests
+
+	public testHighway_Create : () ==> ()
+		testHighway_Create() == (
+			dcl h : Highway := new Highway("A41", 50, 20, 120);
+			
+			assertEqual("A41", h.getName());
+			assertEqual(50, h.getBaseRate());
+			assertEqual(20, h.getLength());
+			assertEqual(120, h.getMaxSpeed());
+		);
+	
+	public testHighway_CalculatePrice : () ==> ()
+		testHighway_CalculatePrice() == (
+			dcl h : Highway := new Highway("A41", 50, 20, 120);
+			
+			dcl v1: Vehicle := new Vehicle("?", "1-1-1-1-", <I>);
+			dcl v2: Vehicle := new Vehicle("?", "1-1-1-1-", <II>);
+			
+			assertEqual(50 * 20 * 1, h.calculatePrice(v1, 20));
+			assertEqual(50 * 20 * 2, h.calculatePrice(v2, 20));
+		);
+
+-----	HighwayRouteEntry Class Tests
+
+-----	Park Class Tests
+
+-----	ProviderEntity Class Tests
+
+-----	Route Class Tests
+		
 ----- Vehicle Class Tests
+
+	public testVehicle_Create: () ==> ()
+		testVehicle_Create() == (
+			dcl v: Vehicle := new Vehicle("?", "1-1-1-1-", <II>);
+			
+			assertEqual("?", v.getMake());
+			assertEqual("1-1-1-1-", v.getPlate());
+			assertEqual(<II>, v.getClass());
+		);
+
 end TestGreenWaySystem

@@ -15,12 +15,24 @@ instance variables
 operations
 	
 	public Highway : String * real * real * real ==> Highway
-		Highway(hName, hBaseRate, hBaseLength, hMaxSpeed) == (name := hName; baseRate := hBaseRate; length := hBaseLength; maxSpeed := hMaxSpeed; return self)
-		pre hName <> "" and hBaseRate > 0 and hBaseLength > 0 and hMaxSpeed > 0
-		post name = hName and baseRate = hBaseRate and length = hBaseLength and maxSpeed = hMaxSpeed;
+		Highway(hName, hBaseRate, hLength, hMaxSpeed) == (name := hName; baseRate := hBaseRate; length := hLength; maxSpeed := hMaxSpeed; return self)
+		pre hName <> "" and hBaseRate > 0 and hLength > 0 and hMaxSpeed > 0
+		post name = hName and baseRate = hBaseRate and length = hLength and maxSpeed = hMaxSpeed;
+	
+	public pure getName: () ==> String
+		getName() == return name;
+	
+	public pure getBaseRate: () ==> real
+		getBaseRate() == return baseRate;
+	
+	public pure getLength: () ==> real
+		getLength() == return length;
+	
+	public pure getMaxSpeed: () ==> real
+		getMaxSpeed() == return maxSpeed;
 	
 	public pure calculatePrice: Vehicle * real ==> real
-		calculatePrice(v, l) == return (Highway`MultiplierForClass(v.getClass()) * l)
+		calculatePrice(v, l) == return (Highway`MultiplierForClass(v.getClass()) * l * baseRate)
 		pre l > 0; -- Need a post-condition for the return value. Is this possible?
 	
 functions

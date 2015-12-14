@@ -9,7 +9,7 @@ instance variables
 	private id : String;
 	private vehicle : Vehicle;
 	private owner : Client;
-	private history : seq of GenericEntry := [];
+	private history : seq of Entry := [];
 	
 operations
 
@@ -17,9 +17,12 @@ operations
 		Device(dId, dVehicle, dOwner) == (id := dId; vehicle := dVehicle; owner := dOwner; return self)
 		post id = dId and vehicle = dVehicle and owner = dOwner;
 	
-	public addToHistory : GenericEntry ==> ()
+	public addToHistory : Entry ==> ()
 		addToHistory(dEntry) == history := [dEntry] ^ history 
 		post history = [dEntry] ^ history~;
+	
+	public pure getHistory : () ==> seq of Entry
+		getHistory() == return history;
 	
 	public pure getId: () ==> String
 		getId() == return id;
