@@ -100,6 +100,33 @@ operations
 			
 			assertEqual({d}, m.getClients());
 		);
+		
+	public testGreenWayManagement_AddProvider : () ==> ()
+		testGreenWayManagement_AddProvider() == (
+			dcl m : GreenWayManagement := new GreenWayManagement();
+			dcl p: Park := new Park("Parque Ciloauto", "Rua Augusto Freitas",0.02);
+			dcl h : Highway := new Highway("A41", 50, 20, 120);
+			
+			m.addProvider(p);
+			m.addProvider(h);
+			
+			assertEqual({p,h}, m.getProviders());
+		);
+		
+		public testGreenWayManagement_RemoveProvider : () ==> ()
+		testGreenWayManagement_RemoveProvider() == (
+			dcl m : GreenWayManagement := new GreenWayManagement();
+			dcl p: Park := new Park("Parque Ciloauto", "Rua Augusto Freitas",0.02);
+			dcl h : Highway := new Highway("A41", 50, 20, 120);
+			
+			m.addProvider(p);
+			m.addProvider(h);
+			
+			m.removeProvider(p);
+			
+			assertEqual({h}, m.getProviders());
+		);
+		
 
 -----	Highway Class Tests
 

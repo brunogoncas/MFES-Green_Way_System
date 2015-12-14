@@ -3,7 +3,9 @@ class HighwayRouteEntry
 types
 
 	public String = seq of char;
-
+	
+	
+	
 instance variables
 
 	private hw : Highway;
