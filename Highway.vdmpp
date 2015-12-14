@@ -29,7 +29,8 @@ operations
 	
 	public pure calculatePrice: Vehicle * real ==> real
 		calculatePrice(v, l) == return (Highway`MultiplierForClass(v.getClass()) * l * baseRate)
-		pre l > 0; -- Need a post-condition for the return value. Is this possible?
+		pre l > 0 -- Need a post-condition for the return value. Is this possible?
+		post Highway`MultiplierForClass(v.getClass()) * l * baseRate > 0;
 	
 functions
 

@@ -17,13 +17,12 @@ operations
 	
 	public pure getValueToPay: Vehicle ==> real
 		getValueToPay(v) == (
-			dcl value : real;
+			dcl value : real := 0.0;
 			
 			for e in entries do
 				value := value + e.getHighway().calculatePrice(v, e.getKilometers());
 			
 			return value;
 		)
-		--	need post-condition for payment here too!
 		
 end Route
